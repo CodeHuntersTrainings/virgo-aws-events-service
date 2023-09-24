@@ -1,0 +1,14 @@
+services:
+  events-service:
+    platform: linux/amd64
+    build: ???
+    container_name: aws_events_service
+    ports:
+      - "8080:8080"
+    environment:
+      - CONFIG_ENV=${ ??? }
+    networks:
+      - ???
+
+networks:
+  backend: { }

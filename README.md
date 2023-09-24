@@ -1,1 +1,1 @@
-# virgo-aws-events-service
+# events-service

@@ -1,0 +1,14 @@
+{
+  "event": {
+    "eventType": "USER_DELETED",
+    "timestamp": "2023-08-10T15:30:00Z",
+    "version": "v1",
+    "eventId": "user-deleted-abcdef-1234562-3123",
+    "source": "ebay",
+    "traceId": "abc-12341323",
+    "data": {
+      "userId": "123"
+    }
+  }
+}
+

@@ -1,0 +1,13 @@
+{
+  "eventType": "USER_CREATED",
+  "timestamp": "2023-08-10T15:30:00Z",
+  "version": "v1",
+  "eventId": "user-created-abcdef-123456",
+  "source": "ebay",
+  "traceId": "abc-1234",
+  "data": {
+    "userId": "user-123",
+    "username": "john_doe",
+    "email": "john@example.com"
+  }
+}
