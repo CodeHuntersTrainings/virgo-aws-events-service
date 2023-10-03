@@ -11,6 +11,6 @@ docker build --tag "$LocalImageName:latest" .
 
 aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin "$EcrLink"
 
-docker tag "$LocalImageName:latest" "$EcrLink/czirjak:latest"
+docker tag "$LocalImageName:latest" "$EcrLink/eventsserviceecr:latest"
 
-docker push "$EcrLink/czirjak:latest"
+docker push "$EcrLink/eventsserviceecr:latest"

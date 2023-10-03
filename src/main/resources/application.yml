@@ -3,6 +3,8 @@ spring:
     active: "backup"
   flyway:
     enabled: false
+  main:
+    allow-bean-definition-overriding: true
 
 management:
   endpoints:

@@ -1,0 +1,31 @@
+#trigger:
+#  - main
+
+trigger: none
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: aws_terraform_user
+
+steps:
+  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+    inputs:
+      terraformVersion: '1.5.5'
+    displayName: 'Install Terraform'
+  - script: |
+      terraform -version
+      terraform -chdir=infrastructure/03-infrastructure init
+    displayName: 'Terraform Init'
+    env:
+      AWS_ACCESS_KEY_ID: $(accessKeyId)
+      AWS_SECRET_ACCESS_KEY: $(accessKey)
+  - script: |
+      terraform -version
+      terraform -chdir=infrastructure/03-infrastructure plan -var-file="base-04-configuration.tfvars"
+    displayName: 'Terraform Plan'
+    env:
+      AWS_ACCESS_KEY_ID: $(accessKeyId)
+      AWS_SECRET_ACCESS_KEY: $(accessKey)

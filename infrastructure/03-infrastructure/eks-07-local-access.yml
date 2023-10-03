@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  # Read more: https://repost.aws/knowledge-center/eks-configure-sso-user
+  mapUsers: |
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: zoltan.czirjak
+      groups:
+        - system:masters

@@ -1,0 +1,36 @@
+trigger: none
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: aws_terraform_user
+
+steps:
+  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+    inputs:
+      terraformVersion: '1.5.5'
+    displayName: 'Install Terraform'
+  - script: |
+      terraform -version
+      terraform -chdir=infrastructure/03-infrastructure init
+    displayName: 'Terraform Init'
+    env:
+      AWS_ACCESS_KEY_ID: $(accessKeyId)
+      AWS_SECRET_ACCESS_KEY: $(accessKey)
+  - script: |
+      terraform -version
+      terraform -chdir=infrastructure/03-infrastructure apply -auto-approve -var-file="base-04-configuration.tfvars"
+    displayName: 'Terraform Apply'
+    env:
+      AWS_ACCESS_KEY_ID: $(accessKeyId)
+      AWS_SECRET_ACCESS_KEY: $(accessKey)
+  - script: |
+      aws eks update-kubeconfig --region eu-central-1 --name codehunters-eks-cluster
+      kubectl apply -f ./infrastructure/03-infrastructure/eks-07-local-access.yml
+      kubectl describe configmap aws-auth -n kube-system
+    displayName: 'Setting up LOCAL accesses'
+    env:
+      AWS_ACCESS_KEY_ID: $(accessKeyId)
+      AWS_SECRET_ACCESS_KEY: $(accessKey)
