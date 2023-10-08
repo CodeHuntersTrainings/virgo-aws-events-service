@@ -1,9 +1,7 @@
 package hu.codehunters.awseventsservice.dataflow.backup.service;
 
-import cloud.localstack.Localstack;
-import cloud.localstack.docker.LocalstackDockerExtension;
-import cloud.localstack.docker.annotation.LocalstackDockerProperties;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -11,11 +9,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.codehunters.awseventsservice.service.model.Event;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -25,8 +19,12 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 
-@ExtendWith(LocalstackDockerExtension.class)
-@LocalstackDockerProperties(services = { "s3" })
+// docker run -d -e SERVICES=s3 -p 4566:4566 localstack/localstack:2.3.2
+//@ExtendWith(LocalstackDockerExtension.class)
+//@LocalstackDockerProperties(
+//        services = { "s3" },
+//        imageTag = "2.3.2"
+//)
 @SpringBootTest
 @Profile("backup")
 @Import(StoreDataOnS3ServiceTest.S3TestConfiguration.class)
@@ -40,12 +38,11 @@ class StoreDataOnS3ServiceTest {
         public AmazonS3 amazonS3Client() {
             return AmazonS3ClientBuilder
                     .standard()
-                    .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
                     .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
-                            Localstack.INSTANCE.getEndpointS3(),
-                            "us-east-1"
-                            ))
-                    //.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("access-key", "secret-key")))
+                            "http://localhost:4566",
+                            "us-east-1"))
+                    .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("access-key", "secret-key")))
+                    .enablePathStyleAccess()
                     .build();
         }
 
