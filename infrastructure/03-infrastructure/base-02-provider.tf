@@ -7,11 +7,11 @@ terraform {
   }
 }
 
-# # To provision resources in AWS
-# provider "aws" {
-#   region = "eu-central-1"
-# }
-#
+# To provision resources in AWS
+provider "aws" {
+  region = "eu-central-1"
+}
+
 # # To install resources by Helm in EKS
 # provider "helm" {
 #   kubernetes {
