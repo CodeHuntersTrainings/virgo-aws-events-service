@@ -2,7 +2,7 @@ resource "aws_security_group" "subnet-security-group" {
   count = var.vpc-enabled ? 1 :0
 
   name                = "general-subnet-security-group"
-  description         = "Allow SSH, HTTP and HTTPS inbound connections"
+  description         = "Allow connections"
   vpc_id              = aws_vpc.vpc[0].id
 
   # allow access on port 5432
