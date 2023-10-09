@@ -26,11 +26,11 @@ steps:
     env:
       AWS_ACCESS_KEY_ID: $(accessKeyId)
       AWS_SECRET_ACCESS_KEY: $(accessKey)
-  - script: |
-      aws eks update-kubeconfig --region eu-central-1 --name codehunters-eks-cluster
-      kubectl apply -f ./infrastructure/03-infrastructure/eks-07-local-access.yml
-      kubectl describe configmap aws-auth -n kube-system
-    displayName: 'Setting up LOCAL accesses'
-    env:
-      AWS_ACCESS_KEY_ID: $(accessKeyId)
-      AWS_SECRET_ACCESS_KEY: $(accessKey)
+  # - script: |
+  #     aws eks update-kubeconfig --region eu-central-1 --name codehunters-eks-cluster
+  #     kubectl apply -f ./infrastructure/03-infrastructure/eks-07-local-access.yml
+  #     kubectl describe configmap aws-auth -n kube-system
+  #   displayName: 'Setting up LOCAL accesses'
+  #   env:
+  #     AWS_ACCESS_KEY_ID: $(accessKeyId)
+  #     AWS_SECRET_ACCESS_KEY: $(accessKey)
