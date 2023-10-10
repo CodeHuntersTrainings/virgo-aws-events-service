@@ -4,7 +4,7 @@ resource "aws_ecr_repository" "events-service-ecr" {
   name = "eventsserviceecr"
 
   tags = {
-    Name        = "eventsserviceecr"
+    Name = "eventsserviceecr"
   }
 }
 
@@ -18,11 +18,11 @@ resource "aws_ecr_lifecycle_policy" "events-service-ecr-lifecycle-policy" {
         "rules": [
             {
                 "rulePriority": 1,
-                "description": "Keep last 2 images",
+                "description": "Keep last 20 images",
                 "selection": {
                     "tagStatus": "any",
                     "countType": "imageCountMoreThan",
-                    "countNumber": 2
+                    "countNumber": 20
                 },
                 "action": {
                     "type": "expire"

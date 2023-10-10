@@ -11,9 +11,9 @@ resource "aws_autoscaling_group" "ecs-asg" {
 
   default_cooldown          = 30
   health_check_grace_period = 30
-  max_size                  = 2
+  max_size                  = 15
   min_size                  = 1
-  desired_capacity          = 1
+  desired_capacity          = 2
   launch_configuration      = aws_launch_configuration.ecs-config-launch-config[0].name
 
   lifecycle {

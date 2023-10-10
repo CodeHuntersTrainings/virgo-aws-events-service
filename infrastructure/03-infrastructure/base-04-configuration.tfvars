@@ -6,17 +6,17 @@
 # s3-enabled      = true
 
 # Day 2. VPC
-internet-gw-enabled   = true
-nat-gw-enabled        = true
-vpc-enabled           = true
+# internet-gw-enabled   = true
+# nat-gw-enabled        = true
+# vpc-enabled           = true
 
 # Day 2. VPC, ALB, ASG, ECS
-# internet-gw-enabled   = true
-# vpc-enabled           = true
-# nat-gw-enabled        = true
-# ecr-enabled           = true
-# ecs-enabled           = true
-# s3-enabled            = true
+internet-gw-enabled   = true
+vpc-enabled           = true
+nat-gw-enabled        = true
+ecr-enabled           = true
+ecs-enabled           = true
+s3-enabled            = true
 
 # Day 2. VPC, EKS
 # internet-gw-enabled   = true
