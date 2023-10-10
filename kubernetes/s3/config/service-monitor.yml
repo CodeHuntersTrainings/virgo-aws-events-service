@@ -4,7 +4,7 @@ metadata:
   name: service-monitor-events-service
   namespace: codehunters
   labels:
-    release: prometheus-operator
+    release: prometheus
 spec:
   selector:
     matchLabels:
