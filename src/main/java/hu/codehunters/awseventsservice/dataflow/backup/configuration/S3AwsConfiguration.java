@@ -12,21 +12,12 @@ import org.springframework.context.annotation.Profile;
 @Profile("backup")
 public class S3AwsConfiguration {
 
-    // @Bean
-    // public AmazonS3 amazonS3Client() {
-    //     return AmazonS3ClientBuilder
-    //             .standard()
-    //             .withCredentials(null) //TODO: add default credentials chain
-    //             .withRegion(" ??? ") //TODO: set the region
-    //             .build();
-    // }
-
     @Bean
     public AmazonS3 amazonS3Client() {
         return AmazonS3ClientBuilder
                 .standard()
-                .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
-                .withRegion(Regions.EU_CENTRAL_1)
+                .withCredentials(null) //TODO: add default credentials chain
+                .withRegion(" ??? ") //TODO: set the region
                 .build();
     }
 
