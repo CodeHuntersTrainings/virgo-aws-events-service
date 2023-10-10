@@ -3,12 +3,14 @@ kind: ???
 metadata:
   name: service-events-service
   namespace: ???
+  labels:
+    app: service-events-service
 spec:
   selector:
     app: events-service
   ports:
     - name: http
       protocol: TCP
-      port: 80
+      port: 8080
       targetPort: ???
   type: ClusterIP

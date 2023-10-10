@@ -7,6 +7,9 @@ resource "helm_release" "kube-prometheus" {
   repository          = "https://prometheus-community.github.io/helm-charts"
   chart               = "kube-prometheus-stack"
   create_namespace    = true
+
+  values = [file("${path.module}/eks-11-monitoring-custom-values.yaml")]
+
 }
 
 # 1. Scale the cluster up manually in AWS Console (up to 10 instances)

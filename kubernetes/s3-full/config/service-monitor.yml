@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service-monitor-events-service
+  namespace: codehunters
+  labels:
+    release: prometheus-operator
+spec:
+  selector:
+    matchLabels:
+      app: service-events-service
+  endpoints:
+    - port: http
+      path: "/actuator/prometheus"

@@ -4,17 +4,30 @@ metadata:
   name: ingress-events-service
   namespace: ???
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /events
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
   rules:
     -  http:
          paths:
-           - path: /backup/events
+           - path: /events
              pathType: Prefix
              backend:
                service:
                  name: service-events-service
                  port:
-                   number: 80
+                    number: 8080
+           - path: /actuator/health
+             pathType: Prefix
+             backend:
+               service:
+                 name: service-events-service
+                 port:
+                    number: 8080
+           - path: /actuator/prometheus
+             pathType: Prefix
+             backend:
+               service:
+                 name: service-events-service
+                 port:
+                   number: 8080

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.codehunters.awseventsservice.dataflow.EventProcessor;
 import hu.codehunters.awseventsservice.service.model.Event;
 import hu.codehunters.awseventsservice.service.model.EventType;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -28,12 +30,17 @@ public class StoreDataOnS3Service implements EventProcessor {
 
     private final String s3BucketName;
 
+    private final Counter storedDataCounter;
+
     public StoreDataOnS3Service(ObjectMapper objectMapper,
                                 AmazonS3 amazonS3Client,
-                                @Value(value = "${events-service.flows.backup.bucket-name}") String s3BucketName) {
+                                @Value(value = "${events-service.flows.backup.bucket-name}") String s3BucketName,
+                                MeterRegistry meterRegistry) {
         this.objectMapper = objectMapper;
         this.amazonS3Client = amazonS3Client;
         this.s3BucketName = s3BucketName;
+
+        storedDataCounter = meterRegistry.counter("events.s3.stored");
     }
 
     // @Override
@@ -133,6 +140,8 @@ public class StoreDataOnS3Service implements EventProcessor {
         PutObjectResult putObjectResult = amazonS3Client.putObject(request);
 
         log.info("Event versionID={} has been sent to S3", putObjectResult.getMetadata().getVersionId());
+
+        storedDataCounter.increment();
 
     }
 }

@@ -12,6 +12,10 @@ spec:
     metadata:
       labels:
         app: events-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       serviceAccountName: service-account-events-service
       containers:
@@ -34,12 +38,12 @@ spec:
             httpGet:
               port: 8080
               path: ???
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 2
           readinessProbe:
             httpGet:
               path: ???
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 60
             periodSeconds: 3
