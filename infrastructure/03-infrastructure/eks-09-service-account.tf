@@ -14,6 +14,7 @@ resource "aws_iam_role" "codehunters-events-service-role" {
   count = var.kubernetes-enabled ? 1 :0
 
   name               = "CodeHuntersEventsServiceEKSRole"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [

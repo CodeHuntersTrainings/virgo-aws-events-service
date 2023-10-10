@@ -5,12 +5,12 @@ LocalImageName="events-service"
 
 ./script_docker-cleanup.sh
 
-./mvnw clean install
+./mvnw clean package
 
-docker build --tag "$LocalImageName:latest" .
+docker build --tag "$LocalImageName:czirjak" .
 
 aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin "$EcrLink"
 
-docker tag "$LocalImageName:latest" "$EcrLink/eventsserviceecr:latest"
+docker tag "$LocalImageName:czirjak" "$EcrLink/eventsserviceecr:czirjak"
 
-docker push "$EcrLink/eventsserviceecr:latest"
+docker push "$EcrLink/eventsserviceecr:czirjak"

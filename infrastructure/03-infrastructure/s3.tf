@@ -4,6 +4,6 @@ resource "aws_s3_bucket" "events-store" {
   bucket = "events-store"
 
   tags = {
-    Name        = "Events Store"
+    Name = "Events Store"
   }
 }
