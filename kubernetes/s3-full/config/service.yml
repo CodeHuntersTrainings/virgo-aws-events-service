@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: service-events-service
-  namespace: ???
+  namespace: codehunters
 spec:
   selector:
     app: events-service
@@ -10,5 +10,5 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: ???
+      targetPort: 8080
   type: ClusterIP

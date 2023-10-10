@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-events-service
-  namespace: ???
+  namespace: codehunters
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /events
     nginx.ingress.kubernetes.io/ssl-redirect: "false"

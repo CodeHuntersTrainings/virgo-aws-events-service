@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: events-service
-  namespace: ???
+  namespace: codehunters
 spec:
   replicas: 1
   selector:
@@ -17,29 +17,29 @@ spec:
       containers:
         - name: events-service
           imagePullPolicy: Always
-          image: 584279960914.dkr.ecr.eu-central-1.amazonaws.com/eventsserviceecr:???
+          image: 584279960914.dkr.ecr.eu-central-1.amazonaws.com/eventsserviceecr:czirjak
           ports:
-            - containerPort: ???
+            - containerPort: 8080
           env:
             - name: CONFIG_ENV
-              value: " ??? "
+              value: "backup"
           resources:
             requests:
               memory: "128Mi"
               cpu: "250m"
             limits:
-              memory: " ??? "
-              cpu: " ??? "
+              memory: "512Mi"
+              cpu: "500m"
           livenessProbe:
             httpGet:
               port: 8080
-              path: ???
+              path: /actuator/health
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 2
           readinessProbe:
             httpGet:
-              path: ???
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 3
