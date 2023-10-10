@@ -10,3 +10,43 @@ data:
       username: zoltan.czirjak
       groups:
         - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev01
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev02
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev03
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev04
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev05
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev06
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev07
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev08
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev09
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::584279960914:role/AWSReservedSSO_VirgoAccess_6568c7c4e889c4e0
+      username: Dev10
+      groups:
+        - system:masters
