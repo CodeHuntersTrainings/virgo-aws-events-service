@@ -1,16 +1,16 @@
-resource "helm_release" "kube-prometheus" {
-  count = var.kubernetes-enabled && var.monitoring-enabled ? 1 :0
-
-  depends_on          = [ aws_eks_cluster.eks-cluster ]
-  name                = "kube-prometheus"
-  namespace           = "monitoring"
-  repository          = "https://prometheus-community.github.io/helm-charts"
-  chart               = "kube-prometheus-stack"
-  create_namespace    = true
-
-  values = [file("${path.module}/eks-11-monitoring-custom-values.yaml")]
-
-}
+# resource "helm_release" "kube-prometheus" {
+#   count = var.kubernetes-enabled && var.monitoring-enabled ? 1 :0
+#
+#   depends_on          = [ aws_eks_cluster.eks-cluster ]
+#   name                = "kube-prometheus"
+#   namespace           = "monitoring"
+#   repository          = "https://prometheus-community.github.io/helm-charts"
+#   chart               = "kube-prometheus-stack"
+#   create_namespace    = true
+#
+#   values = [file("${path.module}/eks-11-monitoring-custom-values.yaml")]
+#
+# }
 
 # 1. Scale the cluster up manually in AWS Console (up to 10 instances)
 # Endpoints:
