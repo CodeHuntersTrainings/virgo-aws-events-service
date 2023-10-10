@@ -17,7 +17,7 @@ spec:
       containers:
         - name: events-service
           imagePullPolicy: Always
-          image: 584279960914.dkr.ecr.eu-central-1.amazonaws.com/eventsserviceecr:latest
+          image: 584279960914.dkr.ecr.eu-central-1.amazonaws.com/eventsserviceecr:czirjak
           ports:
             - containerPort: 8080
           env:
