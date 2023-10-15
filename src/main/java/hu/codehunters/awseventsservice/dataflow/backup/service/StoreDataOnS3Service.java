@@ -56,6 +56,7 @@ public class StoreDataOnS3Service implements EventProcessor {
             } catch (Exception e) {
                 //If we cannot send it, we ignore it ...
                 log.warn("Unable to store Event {} to S3", event.getEventId(), e);
+                throw new RuntimeException(e); //TODO: improve error handling
             }
         });
     }

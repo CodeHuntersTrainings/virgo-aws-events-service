@@ -17,7 +17,8 @@ public class S3AwsConfiguration {
         return AmazonS3ClientBuilder
                 .standard()
                 .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
-                .withRegion("eu-central-1")
+                //TODO: region can be a configuration value
+                .withRegion(Regions.EU_CENTRAL_1)
                 .build();
     }
 
