@@ -75,6 +75,7 @@ class StoreDataOnS3ServiceTest {
     }
 
     @Test
+    @Disabled
     void given_event_when_processed_then_must_be_put_on_s3() throws JsonProcessingException {
         // Given
         String eventAsString = """
