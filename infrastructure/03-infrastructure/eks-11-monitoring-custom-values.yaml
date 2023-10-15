@@ -2,18 +2,18 @@ prometheus:
   prometheusSpec:
     enableAdminAPI: true
   # Below you can see configuration responsible for defining ServiceMonitor for Spring Boot app
-  additionalServiceMonitors:
-    - name: kube-prometheus-stack-spring-boot
-      selector:
-        matchLabels:
-          prometheus-monitoring: 'true'
-      namespaceSelector:
-        matchNames:
-          - czirjak # TODO: Warning
-      endpoints:
-        - port: http  # TODO: Warning
-          interval: 5s
-          path: /actuator/prometheus
+  #additionalServiceMonitors:
+  #  - name: kube-prometheus-stack-spring-boot
+  #    selector:
+  #      matchLabels:
+  #        prometheus-monitoring: 'true'
+  #    namespaceSelector:
+  #      matchNames:
+  #        - czirjak # TODO: Warning
+  #    endpoints:
+  #      - port: http  # TODO: Warning
+  #        interval: 5s
+  #        path: /actuator/prometheus
 
 grafana:
   enabled: true
