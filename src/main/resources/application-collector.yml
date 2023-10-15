@@ -1,0 +1,11 @@
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+events-service:
+  flows:
+    collector:
+      sqs:
+        # VPC Endpoint, just an example: vpce-0c4805e2eb7cc1fe3-epu038ux.sqs.eu-central-1.vpce.amazonaws.com
+        url: "https://vpce-051450323b3d07fe5-il5e5ei9.sqs.eu-central-1.vpce.amazonaws.com"
+        queue: "/584279960914/codehunters-events-sqs"
