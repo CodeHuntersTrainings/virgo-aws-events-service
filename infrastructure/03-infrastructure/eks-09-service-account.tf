@@ -26,7 +26,7 @@ resource "aws_iam_role" "codehunters-events-service-role" {
         Action = "sts:AssumeRoleWithWebIdentity",
         Condition = {
           StringEquals = {
-            "${module.account_iam-oidc-identity-provider[0].url}:sub" = "system:serviceaccount:codehunters:service-account-events-service"
+            "${module.account_iam-oidc-identity-provider[0].url}:sub" = "system:serviceaccount:czirjak:service-account-events-service"
           }
         }
       }
