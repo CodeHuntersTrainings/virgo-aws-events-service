@@ -3,12 +3,12 @@
 
 # Day 1. S3
 # Running locally:
-s3-enabled      = true
+# s3-enabled      = true
 
 # Day 2. VPC
-# internet-gw-enabled   = true
-# nat-gw-enabled        = true
-# vpc-enabled           = true
+internet-gw-enabled   = true
+nat-gw-enabled        = true
+vpc-enabled           = true
 
 # Day 2. VPC, ALB, ASG, ECS
 # internet-gw-enabled   = true

@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
-kind: ???
+kind: Ingress
 metadata:
   name: ingress-events-service
-  namespace: ???
+  namespace: czirjak
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
@@ -24,10 +24,3 @@ spec:
                  name: service-events-service
                  port:
                     number: 8080
-           - path: /actuator/prometheus
-             pathType: Prefix
-             backend:
-               service:
-                 name: service-events-service
-                 port:
-                   number: 8080

@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Create an IAM Role named S3Role with AmazonS3FullAccess policy
+
+Resources:
+  S3Role:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: S3Role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              AWS: "*"
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+
+Outputs:
+  S3RoleArn:
+    Description: ARN of the S3Role IAM role
+    Value: !GetAtt S3Role.Arn

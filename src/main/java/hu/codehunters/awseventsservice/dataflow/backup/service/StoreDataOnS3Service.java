@@ -61,7 +61,8 @@ public class StoreDataOnS3Service implements EventProcessor {
     }
 
     private String generateS3Key(String source, EventType eventType, String eventId) {
-        return "source=%s/type=%s/%s.json"; //TODO: return a real object key
+        return String.format("source=%s/type=%s/%s.json",
+                source, eventType, eventId);
     }
 
     private Optional<String> convertToJson(Event event) {
@@ -77,15 +78,15 @@ public class StoreDataOnS3Service implements EventProcessor {
     private void storeJsonOnS3(String json, String key) {
         byte[] contentBytes = json.getBytes();
         ObjectMetadata metadata = new ObjectMetadata();
-        //TODO: set the Content Length based on the length of the contentBytes
-        //TODO: set the Content Type to application/json
+        metadata.setContentLength(contentBytes.length);
+        metadata.setContentType("application/json");
 
         PutObjectRequest request = new PutObjectRequest(
-                null, //TODO: add bucket name
-                null, //TODO: add Object Key
+                s3BucketName,
+                key,
                 new ByteArrayInputStream(contentBytes), metadata);
 
-        PutObjectResult putObjectResult = null; //TODO: Put the Object to the Bucket via the S3 Client
+        PutObjectResult putObjectResult = amazonS3Client.putObject(request);
 
         log.info("Event versionID={} has been sent to S3", putObjectResult.getMetadata().getVersionId());
 

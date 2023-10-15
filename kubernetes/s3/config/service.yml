@@ -1,8 +1,8 @@
 apiVersion: v1
-kind: ???
+kind: Service
 metadata:
   name: service-events-service
-  namespace: ???
+  namespace: czirjak
   labels:
     app: service-events-service
 spec:
@@ -12,5 +12,5 @@ spec:
     - name: http
       protocol: TCP
       port: 8080
-      targetPort: ???
+      targetPort: 8080
   type: ClusterIP

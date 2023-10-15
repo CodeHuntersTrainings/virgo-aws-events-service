@@ -1,8 +1,8 @@
 apiVersion: apps/v1
-kind: ???
+kind: Deployment
 metadata:
   name: events-service
-  namespace: ???
+  namespace: czirjak
 spec:
   replicas: 1
   selector:
@@ -12,38 +12,34 @@ spec:
     metadata:
       labels:
         app: events-service
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
-        prometheus.io/path: "/actuator/prometheus"
     spec:
       serviceAccountName: service-account-events-service
       containers:
         - name: events-service
           imagePullPolicy: Always
-          image: 584279960914.dkr.ecr.eu-central-1.amazonaws.com/eventsserviceecr:???
+          image: 584279960914.dkr.ecr.eu-central-1.amazonaws.com/eventsserviceecr:czirjak
           ports:
-            - containerPort: ???
+            - containerPort: 8080
           env:
             - name: CONFIG_ENV
-              value: " ??? "
+              value: "backup"
           resources:
             requests:
               memory: "128Mi"
               cpu: "250m"
             limits:
-              memory: " ??? "
-              cpu: " ??? "
+              memory: "512Mi"
+              cpu: "350m"
           livenessProbe:
             httpGet:
               port: 8080
-              path: ???
+              path: /actuator/health
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 2
           readinessProbe:
             httpGet:
-              path: ???
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 3

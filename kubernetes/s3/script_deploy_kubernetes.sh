@@ -10,4 +10,3 @@ kubectl apply -f ./config/service.yml
 
 kubectl apply -f ./config/ingress.yml
 
-kubectl apply -f ./config/service-monitor.yml

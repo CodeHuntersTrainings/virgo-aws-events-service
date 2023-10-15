@@ -1,5 +1,7 @@
 package hu.codehunters.awseventsservice.dataflow.backup.service;
 
+import cloud.localstack.docker.LocalstackDockerExtension;
+import cloud.localstack.docker.annotation.LocalstackDockerProperties;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.codehunters.awseventsservice.service.model.Event;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -20,11 +23,11 @@ import org.springframework.context.annotation.Profile;
 
 
 // docker run -d -e SERVICES=s3 -p 4566:4566 localstack/localstack:2.3.2
-//@ExtendWith(LocalstackDockerExtension.class)
-//@LocalstackDockerProperties(
-//        services = { "s3" },
-//        imageTag = "2.3.2"
-//)
+@ExtendWith(LocalstackDockerExtension.class)
+@LocalstackDockerProperties(
+        services = { "s3" },
+        imageTag = "2.3.2"
+)
 @SpringBootTest
 @Profile("backup")
 @Import(StoreDataOnS3ServiceTest.S3TestConfiguration.class)
@@ -41,14 +44,16 @@ class StoreDataOnS3ServiceTest {
                     .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
                             "http://localhost:4566",
                             "us-east-1"))
-                    .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("access-key", "secret-key")))
+                    .withCredentials(new AWSStaticCredentialsProvider(
+                            new BasicAWSCredentials("access-key", "secret-key"))
+                    )
                     .enablePathStyleAccess()
                     .build();
         }
 
     }
 
-    private static final String BUCKET_NAME = "events-store";
+    private static final String BUCKET_NAME = "czirjak-test-events-store";
 
     @Autowired
     private StoreDataOnS3Service storeDataOnS3Service;
@@ -70,7 +75,6 @@ class StoreDataOnS3ServiceTest {
     }
 
     @Test
-    @Disabled //TODO: remove this
     void given_event_when_processed_then_must_be_put_on_s3() throws JsonProcessingException {
         // Given
         String eventAsString = """

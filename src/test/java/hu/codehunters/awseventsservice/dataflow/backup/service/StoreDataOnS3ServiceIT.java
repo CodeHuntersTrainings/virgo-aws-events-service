@@ -1,6 +1,5 @@
 package hu.codehunters.awseventsservice.dataflow.backup.service;
 
-import cloud.localstack.docker.annotation.LocalstackDockerProperties;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,11 +12,10 @@ import org.springframework.context.annotation.Profile;
 
 
 @SpringBootTest
-@LocalstackDockerProperties(services = { "s3" })
 @Profile("backup")
 class StoreDataOnS3ServiceIT {
 
-    private static final String BUCKET_NAME = "events-store";
+    private static final String BUCKET_NAME = "czirjak-test-events-store";
 
     @Autowired
     private StoreDataOnS3Service storeDataOnS3Service;
@@ -30,16 +28,15 @@ class StoreDataOnS3ServiceIT {
 
     @BeforeEach
     void runBeforeEach() {
-        //TODO: create bucket
+        amazonS3.createBucket(BUCKET_NAME);
     }
 
     @AfterEach
     void runAfterEach() {
-        //TODO: delete bucket
+        amazonS3.deleteBucket(BUCKET_NAME);
     }
 
     @Test
-    @Disabled //TODO: remove this
     void given_event_when_processed_then_must_be_put_on_s3() throws JsonProcessingException {
         // Given
         String eventAsString = """
@@ -59,8 +56,6 @@ class StoreDataOnS3ServiceIT {
                 }
                 """;
 
-        String bucketName = " ??? "; //TODO: fill the bucket name
-
         String objectKey = "source=ebay/type=ad_created/ad-created-123456.json";
 
         Event input = objectMapper.readValue(eventAsString, Event.class);
@@ -69,10 +64,11 @@ class StoreDataOnS3ServiceIT {
         storeDataOnS3Service.process(input);
 
         // Then
-        S3Object s3Object = null; //TODO: getObject ...
+        S3Object s3Object = amazonS3.getObject(BUCKET_NAME, objectKey);
         Assertions.assertNotNull(s3Object);
 
-        //TODO: delete object
+        // Cleanup
+        amazonS3.deleteObject(BUCKET_NAME, objectKey);
 
     }
 
