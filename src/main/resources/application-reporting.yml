@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: ${DB_PASSWORD}
+    # The URl must be copied from the CLUSTER !!!
+    url: jdbc:postgresql://tf-20230829131522018700000002.cluster-cyzyq4n4xyxh.eu-central-1.rds.amazonaws.com:5432/codehunters_user_events
+    username: ${DB_USERNAME}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  flyway:
+    enabled: true
