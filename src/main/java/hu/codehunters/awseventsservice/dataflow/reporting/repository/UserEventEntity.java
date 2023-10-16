@@ -26,7 +26,7 @@ public class UserEventEntity {
     @Column(name = "event_type")
     private String eventType;
 
-    @Column(name = "timestamp")
+    @Column(name = "event_datetime")
     private Instant timestamp;
 
     @Column(name = "user_id")

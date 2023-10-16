@@ -19,7 +19,7 @@ resource "random_password" "rds-password" {
 resource "aws_secretsmanager_secret" "rds-secrets" {
   count = var.database-enabled ? 1 :0
 
-  name = "codehunters-aurora-secrets-v7"
+  name = "codehunters-aurora-secrets-v8"
 }
 
 resource "aws_secretsmanager_secret_version" "rds-secrets-version" {
