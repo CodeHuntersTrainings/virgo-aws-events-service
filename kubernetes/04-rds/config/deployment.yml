@@ -21,23 +21,12 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: secret-provider-events-service # SecretProviderClass name
-      initContainers:
-        - name: create-secrets
-          image: alpine
-          command:
-            - sh
-            - -c
-            - |
-              # Read the secrets from the volume
-              DB_USERNAME=$(cat /mnt/secrets-store/username)
-              DB_PASSWORD=$(cat /mnt/secrets-store/password)
-
+      containers:
+        - name: events-service
           volumeMounts:
             - name: secrets-store-inline
               mountPath: /mnt/secrets-store
               readOnly: true
-      containers:
-        - name: events-service
           imagePullPolicy: Always
           image: 584279960914.dkr.ecr.eu-central-1.amazonaws.com/eventsserviceecr:czirjak
           ports:
@@ -45,6 +34,16 @@ spec:
           env:
             - name: CONFIG_ENV
               value: "reporting"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: password
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: username
           resources:
             requests:
               memory: "300Mi"
