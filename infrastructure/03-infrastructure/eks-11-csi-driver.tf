@@ -13,7 +13,7 @@ resource "helm_release" "secrets-store-csi-driver" {
 
   values = [
     {
-      "syncSecret.enabled" = true
+      "syncSecret.enabled" = "true"
     }
   ]
 }
