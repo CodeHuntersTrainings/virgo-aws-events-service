@@ -11,11 +11,10 @@ resource "helm_release" "secrets-store-csi-driver" {
   chart      = "secrets-store-csi-driver"
   namespace  = "kube-system"
 
-  values = [
-    {
-      "syncSecret.enabled" = "true"
-    }
-  ]
+  set {
+    name = "syncSecret.enabled"
+    value = "true"
+  }
 }
 
 resource "helm_release" "ascp" {
