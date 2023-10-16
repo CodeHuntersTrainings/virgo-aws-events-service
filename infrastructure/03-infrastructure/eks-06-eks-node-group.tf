@@ -10,13 +10,13 @@ resource "aws_eks_node_group" "node-ec2" {
   subnet_ids      = aws_subnet.private-subnets.*.id
 
   scaling_config {
-    desired_size = 9
+    desired_size = 4
     max_size     = 15
     min_size     = 1
   }
 
   ami_type       = "AL2_x86_64"
-  instance_types = [var.monitoring-enabled ? "t2.medium" : "t2.micro"]
+  instance_types = [ ( var.monitoring-enabled || var.database-enabled) ? "t2.medium" : "t2.micro" ]
   capacity_type  = "ON_DEMAND"
   disk_size      = 15
 
