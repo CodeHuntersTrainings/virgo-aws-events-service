@@ -11,3 +11,14 @@ resource "helm_release" "secrets-store-csi-driver" {
   chart            = "secrets-store-csi-driver"
   namespace        = "kube-system"
 }
+
+resource "helm_release" "ascp" {
+  depends_on       = [ helm_release.secrets-store-csi-driver ]
+
+  count = var.kubernetes-enabled && var.database-enabled ? 1 : 0
+
+  name             = "csi-secrets-store-provider-aws"
+  repository       = "https://aws.github.io/secrets-store-csi-driver-provider-aws/charts/"
+  chart            = "csi-secrets-store-provider-aws"
+  namespace        = "kube-system"
+}

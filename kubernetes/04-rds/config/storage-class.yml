@@ -1,0 +1,24 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: secret-provider-events-service
+  namespace: codehunters
+spec:
+  provider: aws
+  secretObjects:
+    - secretName: events-service-database-credentials
+      type: Opaque
+      data:
+        - objectName: username
+          key: username
+        - objectName: password
+          key: password
+  parameters:
+    objects: |
+      - objectName: "codehunters-aurora-secrets-v6"
+        objectType: "secretsmanager"
+        jmesPath:
+          - path: "username"
+            objectAlias: "username"            
+          - path: "password"
+            objectAlias: "password"
