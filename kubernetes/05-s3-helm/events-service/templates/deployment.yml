@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: events-service
+  namespace: czirjak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: events-service
+  template:
+    metadata:
+      labels:
+        app: events-service
+    spec:
+      serviceAccountName: service-account-events-service
+      containers:
+        - name: events-service
+          imagePullPolicy: Always
+          image: "{{ .Values.image.image }}"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CONFIG_ENV
+              value: "backup"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "350m"
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 3
