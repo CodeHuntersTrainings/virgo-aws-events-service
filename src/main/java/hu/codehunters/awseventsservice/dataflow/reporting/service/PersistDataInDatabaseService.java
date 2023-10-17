@@ -9,7 +9,6 @@ import hu.codehunters.awseventsservice.exception.MissingUserIdException;
 import hu.codehunters.awseventsservice.exception.UnableToSaveUserEventException;
 import hu.codehunters.awseventsservice.service.model.Event;
 import hu.codehunters.awseventsservice.service.model.EventType;
-import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -33,8 +32,7 @@ public class PersistDataInDatabaseService implements EventProcessor {
     private final UserEventRepository repository;
 
     public PersistDataInDatabaseService(ObjectMapper objectMapper,
-                                        UserEventRepository repository,
-                                        MeterRegistry meterRegistry) {
+                                        UserEventRepository repository) {
         this.objectMapper = objectMapper;
         this.repository = repository;
     }
@@ -68,6 +66,7 @@ public class PersistDataInDatabaseService implements EventProcessor {
             );
 
             repository.save(userEventEntity);
+
         } catch (JsonProcessingException e) {
             log.error("Unable to save event {} in Reporting, parsing data to JSON failed.", event.getEventId());
             throw new UnableToSaveUserEventException("Unable to save event in Reporting, parsing data to JSON failed.", e);

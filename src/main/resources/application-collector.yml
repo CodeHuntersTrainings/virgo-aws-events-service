@@ -7,5 +7,5 @@ events-service:
     collector:
       sqs:
         # VPC Endpoint, just an example: vpce-0c4805e2eb7cc1fe3-epu038ux.sqs.eu-central-1.vpce.amazonaws.com
-        url: "https://vpce-02083c679f4180217-0ohiirtj.sqs.eu-central-1.vpce.amazonaws.com"
+        url: " TODO "
         queue: "/584279960914/codehunters-events-sqs"

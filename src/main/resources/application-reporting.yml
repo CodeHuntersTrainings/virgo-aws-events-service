@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     password: ${DB_PASSWORD}
-    # The URl must be copied from the CLUSTER !!!
-    url: jdbc:postgresql://tf-20231016213704229400000006.cluster-cyzyq4n4xyxh.eu-central-1.rds.amazonaws.com:5432/codehunters_user_events
+    # The URl must be copied from the CLUSTER
+    url: jdbc:postgresql://TODO:5432/codehunters_user_events
     username: ${DB_USERNAME}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
