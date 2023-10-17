@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: service-events-service # Service selector
   endpoints:
-    - port: http
+    - port: http # the name of the port
       path: '/actuator/prometheus'
       interval: 10s
       honorLabels: true

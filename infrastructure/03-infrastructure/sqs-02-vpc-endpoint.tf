@@ -1,5 +1,5 @@
 resource "aws_vpc_endpoint" "sqs-endpoint" {
-  count = var.queue-enabled ? 1 :0 # 1 = master
+  count = var.queue-enabled ? 1 : 0 # 1 = master
 
   vpc_id                = aws_vpc.vpc[0].id
   service_name          = "com.amazonaws.eu-central-1.sqs"

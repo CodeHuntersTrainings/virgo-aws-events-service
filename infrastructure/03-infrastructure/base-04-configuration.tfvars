@@ -27,22 +27,22 @@
 # kubernetes-enabled    = true
 
 # Day 2. VPC, EKS, Monitoring
-internet-gw-enabled   = true
-nat-gw-enabled        = true
-vpc-enabled           = true
-ecr-enabled           = true
-s3-enabled            = true
-kubernetes-enabled    = true
-monitoring-enabled    = true
-
-# Day 3. VPC, EKS, SQS
 # internet-gw-enabled   = true
 # nat-gw-enabled        = true
 # vpc-enabled           = true
 # ecr-enabled           = true
 # s3-enabled            = true
 # kubernetes-enabled    = true
-# queue-enabled         = true
+# monitoring-enabled    = true
+
+# Day 3. VPC, EKS, SQS
+internet-gw-enabled   = true
+nat-gw-enabled        = true
+vpc-enabled           = true
+ecr-enabled           = true
+s3-enabled            = true
+kubernetes-enabled    = true
+queue-enabled         = true
 
 # Day 3. VPC, EKS, RDS
 # internet-gw-enabled   = true
