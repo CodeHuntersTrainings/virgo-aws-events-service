@@ -65,5 +65,5 @@ public class PublishEventToQueueService implements EventProcessor {
     }
 }
 
-// To receive messages: List<Message> messages = sqsClient.receiveMessage(queueUrl).getMessages();
+// To receive messages: List<Message> messages = sqsClient.receiveMessage(sqsUrl + queue).getMessages();
 // Every message has a body ..., a method can be wrapped into @Scheduled(fixedDelay = 5000)
