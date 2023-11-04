@@ -85,7 +85,9 @@ public class StoreDataOnS3Service implements EventProcessor {
         PutObjectRequest request = new PutObjectRequest(
                 s3BucketName,
                 key,
-                new ByteArrayInputStream(contentBytes), metadata);
+                new ByteArrayInputStream(contentBytes),
+                metadata
+        );
 
         PutObjectResult putObjectResult = amazonS3Client.putObject(request);
 

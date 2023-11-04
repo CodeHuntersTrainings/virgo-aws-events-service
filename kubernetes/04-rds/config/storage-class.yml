@@ -15,6 +15,7 @@ spec:
             objectAlias: "username"            
           - path: "password"
             objectAlias: "password"
+  # This creates Secret file in EKS
   secretObjects:
     - secretName: database-credentials
       type: Opaque
